@@ -14,10 +14,15 @@ pageEncoding="UTF-8"%>
 <title>This is Index</title>
 </head>
 <body>
-<div> <h1>You are at the homepage</h1></div>
+<div> 
+ <h1>You are at the homepage</h1>
+</div>
 
 <a href="signup">Sign Up</a>
 <a href="index">Home</a>
+<a href="login">Login</a>
+<a href="guest-tournament">Start a Tournament</a>
+
 
 </body>
 </html>

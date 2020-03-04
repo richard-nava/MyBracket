@@ -18,6 +18,9 @@ public class Tournament {
 	@Column(name="tournament_name")
 	private String name;
 	
+	@Column(name="guest_tournament")
+	private boolean guest = false;
+	
 	
 	
 //	private ArrayList<Player> players;

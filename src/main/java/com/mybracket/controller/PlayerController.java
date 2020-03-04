@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mybracket.entity.Player;
@@ -32,48 +33,6 @@ public class PlayerController {
 	
 	@Autowired
 	PlayerRepository playerRepo;
-	
-//	@RequestMapping(value="/submitPlayerDetails", 
-//			consumes=MediaType.APPLICATION_JSON_VALUE,
-//			method=RequestMethod.POST)
-//	String submitPlayerDetails(@RequestBody Player player) {
-//		
-//		repo.save(player);
-//		
-//		return "profile";
-//	}
-	
-
-	@PostMapping("signup")
-	String signup(@ModelAttribute Player player, RedirectAttributes redirect) {
-		
-		try {
-			Optional<Player> usr = playerRepo.getByEmail(player.getEmail());
-			if(usr.isPresent()) {
-				
-				redirect.addFlashAttribute("error", "User already exists");
-				return "redirect:/signup";
-			}
-			playerRepo.save(player);
-			System.out.println("********************player saved********************");
-			redirect.addFlashAttribute("msg", "Registration Successful");
-		}catch(Exception e) {
-			
-		}
-		
-	return "redirect:/login";
-	}
-	
-	
-	
-//	@RequestMapping(value="signup", method = RequestMethod.POST,
-//			consumes=MediaType.APPLICATION_JSON_VALUE)	
-//	@ResponseBody String signup(Player player) {
-//		this.playerRepo.save(player);
-//		
-//		return "redirect:/login";
-//		
-//	}
 	
 	
 	
@@ -101,48 +60,70 @@ public class PlayerController {
 		
 	}
 	
-//	@RequestMapping(value="/login", 
-//			produces=MediaType.APPLICATION_JSON_VALUE,
-//			method=RequestMethod.POST)
-//	@ResponseBody
-//	private ResponseEntity<Optional<Player>> playerLogin(@RequestBody Player player){
-//		
-//		Optional<Player> tempPlayer = repo.findById(player.getUsername());
-//		
-//		if(tempPlayer.isPresent() && tempPlayer.get().getPassword().equals(player.getPassword())) {
-//			
-//			return new ResponseEntity<>(tempPlayer,HttpStatus.OK);
-//		}
-//		
-//		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//	}
 	
-	
-	@PostMapping("login")
-	@ResponseBody
-	private ResponseEntity<Player>login(@RequestBody Player player) {
-		Optional<Player> databaseStudent = this.playerRepo.findById(player.getEmail());
-		if (!databaseStudent.isPresent()) {
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-		}else if (player.getPassword().equals(databaseStudent.get().getPassword())) {
-			return new ResponseEntity<>(databaseStudent.get(), HttpStatus.OK);
-		}else {
-			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-		}
-	}
-	
-	
+	// *********** Login/Logout ***********
 	@GetMapping("login")
 	String login() {
 		return "login";
 	}
+	
+	@PostMapping("login")
+	String login(@RequestParam String username,
+				 @RequestParam String password, Model model) {
+		
+		Optional<Player>  usr = playerRepo.login(username,password);
+		if(usr.isPresent()) {
 			
+			model.addAttribute("msg", "Welcome to MyBracket!");
+			model.addAttribute("loggedInUser", usr.get());
+			return "profile";
+		}
+		
+		model.addAttribute("error", "Invalid credentials");
+		return "login";
+	}
+	
+	@GetMapping("logout")
+	String logout(SessionStatus status, Model model) {
+		
+		status.setComplete();
+		model.addAttribute("loggedInUser", "");
+		model.addAttribute("msg", "Farewell!");
+		return "login";
+	}
+	
+	
+	// *********** Sign up ***********
 	@GetMapping("signup")
 	String signup(Model model) {
 		model.addAttribute("player", new Player());
 		return "signup";
 	}
 	
+	@PostMapping("signup")
+	String signup(@ModelAttribute Player player, RedirectAttributes redirect) {
+		
+		try {
+			Optional<Player> usr = playerRepo.getByEmail(player.getEmail());
+			if(usr.isPresent()) {
+				
+				redirect.addFlashAttribute("error", "User already exists");
+				return "redirect:/signup";
+			}
+			playerRepo.save(player);
+			System.out.println("********************player saved********************");
+			redirect.addFlashAttribute("msg", "Registration Successful");
+		}catch(Exception e) {
+			
+		}
+		
+	return "redirect:/login";
+	}
+	
+	@GetMapping("profile")
+	String profile() {
+		return "profile";
+	}
 	
 	@GetMapping("guestTournament")
 	String guestTourney() {

@@ -7,6 +7,14 @@ import com.mybracket.entity.Bracket;
 import com.mybracket.entity.Match;
 import com.mybracket.entity.Player;
 
+/* 
+ * This is based (copy/pasted) off my initial prototype of tournament bracket logic 
+ * and therefore is not operational in this application. Classes include methods 
+ * and parameters not specified in this program.
+ */
+
+
+
 public class LogicTest {
 
 ArrayList<Player> players = new ArrayList<Player>();

@@ -10,11 +10,33 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<title>Login</title>
 </head>
 <body>
 
-<h2>${msg}</h2>
+<div>
+	<h2>${msg}</h2>
+</div>
+
+<div class="container">
+	<form action="${action}" method="post">
+	  <div class="form-group">
+	    <label for="exampleUsername">Username</label>
+	    <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp"/>
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPassword1">Password</label>
+	    <input type="password" name="password" class="form-control" id="password"/>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+	</div>
+ 
+
+
+
 
 </body>
 </html>
