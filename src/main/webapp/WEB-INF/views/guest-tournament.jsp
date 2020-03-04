@@ -24,7 +24,7 @@ pageEncoding="UTF-8"%>
   <div class="input-group-prepend">
     <span class="input-group-text">Enter Teams</span>
   </div>
-  	<form:form>
+  	<form:form action="guestTournamentCreate" method="post">
   		<textarea class="form-control" name="names" aria-label="With textarea" placeholder="Enter each team name in ranked order, separated by a comma. EX: London Spitfire, New York Excelsior, Houston Outlaws, Vancouver Titans"></textarea>
 		<button type="submit">Generate Tournament</button>
 	</form:form>

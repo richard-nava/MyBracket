@@ -15,6 +15,9 @@ public class TempPlayer {
 	
 	public TempPlayer() {}
 	
+	public TempPlayer(String name) {
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;
@@ -23,9 +26,5 @@ public class TempPlayer {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-		
-	
 	
 }

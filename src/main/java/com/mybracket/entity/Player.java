@@ -30,6 +30,10 @@ public class Player {
 	// constructors
 	public Player() {}
 	
+	public Player(String firstName){
+		this.firstName = firstName;
+	}
+	
 	public Player(String username, String email, String password, String firstName, String lastName,
 			String confirmPass) {
 		super();

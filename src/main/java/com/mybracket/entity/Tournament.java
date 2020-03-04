@@ -23,74 +23,58 @@ public class Tournament {
 	
 	
 	
-//	private ArrayList<Player> players;
-//	
-//	Bracket bracket = new Bracket();
-//	
+
+	
+	// ********** constructors **********
+	public Tournament() {}
 	
 	
 	
+	// ********** functions **********
 	
+	// Take in String of temp players and sort them as players
+	public static ArrayList<TempPlayer> generateTournament(String namesAsString) {
+		
+		ArrayList<TempPlayer> tempTorunamentPlayers = new ArrayList<>();
+		
+		String[] playerNames = namesAsString.split(",");
+		
+		for(String var : playerNames) {
+			
+			TempPlayer player = new TempPlayer(var);
+			tempTorunamentPlayers.add(player);
+		}
+		
+		
+		return tempTorunamentPlayers;
+	}
+	
+	
+	
+	// ********** Getters/Setters **********
 	public String getName() {
 		return name;
 	}
 
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
+	public boolean isGuest() {
+		return guest;
+	}
 
+	public void setGuest(boolean guest) {
+		this.guest = guest;
+	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-
-
-
-//	public ArrayList<Player> getPlayers() {
-//		return players;
-//	}
-//
-//
-//
-//
-//
-//	public void setPlayers(ArrayList<Player> players) {
-//		this.players = players;
-//	}
-//
-//
-//
-//
-//
-//	public Bracket getBracket() {
-//		return bracket;
-//	}
-//
-//
-//
-//
-//
-//	public void setBracket(Bracket bracket) {
-//		this.bracket = bracket;
-//	}
-
-
-
-
-
-//	public void createTempPlayers(String str){
-//		
-//		String[] players = str.split(", ");
-//		
-//		for(String var: players) {
-//			
-//			TempPlayer newPlayer = new TempPlayer();
-//			newPlayer.setName(var);
-//			bracket.activeTempPlayers.add(newPlayer);
-//			
-//			
-//		}
-//	}
 
 }

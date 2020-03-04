@@ -1,5 +1,6 @@
 package com.mybracket.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mybracket.entity.Player;
+import com.mybracket.entity.TempPlayer;
+import com.mybracket.entity.Tournament;
 import com.mybracket.repository.PlayerRepository;
 
 @CrossOrigin
@@ -33,32 +36,6 @@ public class PlayerController {
 	
 	@Autowired
 	PlayerRepository playerRepo;
-	
-	
-	
-	@RequestMapping(value="/playerSearch", 
-			produces=MediaType.APPLICATION_JSON_VALUE,
-			method=RequestMethod.GET)
-	@ResponseBody
-	private ResponseEntity<Optional<Player>> findPlayer(String username) {
-		
-		Optional<Player> player = playerRepo.findById(username);
-		
-		return new ResponseEntity<>(player, HttpStatus.OK);
-		
-	}
-	
-	@RequestMapping(value="/viewAll", 
-			produces=MediaType.APPLICATION_JSON_VALUE,
-			method=RequestMethod.GET)
-	@ResponseBody
-	private ResponseEntity<List<Player>> viewAll() {
-		
-		List<Player> players = playerRepo.findAll();
-		
-		return new ResponseEntity<>(players, HttpStatus.OK);
-		
-	}
 	
 	
 	// *********** Login/Logout ***********
@@ -120,19 +97,65 @@ public class PlayerController {
 	return "redirect:/login";
 	}
 	
+	
+	// *********** Guest Tournaments (Tournaments that aren't saved) ***********
+	@GetMapping("guest-tournament")
+	String guestTourney() {
+		return "guest-tournament";
+	}
+	
+	
+	@PostMapping("guestTournamentCreate")
+	String createGuestTournament(@RequestParam String names, Model model) {
+		
+		ArrayList<TempPlayer> players = Tournament.generateTournament(names);
+		model.addAttribute("players", players);
+		
+		
+		return "your-tournament";
+	}
+	
+	
+	
+	
 	@GetMapping("profile")
 	String profile() {
 		return "profile";
 	}
 	
-	@GetMapping("guestTournament")
-	String guestTourney() {
-		return "guest-tournament";
-	}
+	
 	
 	@GetMapping(value={"/","index"})
 	String index() {
 		return "index";
 	}
+	
+	
+	// ***************** Tests for Postman *****************
+
+	@RequestMapping(value="/playerSearch", 
+			produces=MediaType.APPLICATION_JSON_VALUE,
+			method=RequestMethod.GET)
+	@ResponseBody
+	private ResponseEntity<Optional<Player>> findPlayer(String username) {
+		
+		Optional<Player> player = playerRepo.findById(username);
+		
+		return new ResponseEntity<>(player, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/viewAll", 
+			produces=MediaType.APPLICATION_JSON_VALUE,
+			method=RequestMethod.GET)
+	@ResponseBody
+	private ResponseEntity<List<Player>> viewAll() {
+		
+		List<Player> players = playerRepo.findAll();
+		
+		return new ResponseEntity<>(players, HttpStatus.OK);
+		
+	}
+	
 
 }
