@@ -12,9 +12,21 @@ public class TempPlayer {
 	@Id
 	@Column(name="Name")
 	private String name;
+	private boolean inMatch = false;
 	
 	public TempPlayer() {}
 	
+	
+	public boolean isInMatch() {
+		return inMatch;
+	}
+
+
+	public void setInMatch(boolean inMatch) {
+		this.inMatch = inMatch;
+	}
+
+
 	public TempPlayer(String name) {
 		this.name = name;
 	}
@@ -26,5 +38,12 @@ public class TempPlayer {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+	@Override
+	public String toString() {
+		return  name;
+	}
+	
 	
 }

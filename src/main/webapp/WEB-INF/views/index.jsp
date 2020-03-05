@@ -10,18 +10,23 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <meta charset="UTF-8">
-<title>This is Index</title>
+<title>Homepage</title>
 </head>
 <body>
-<div> 
- <h1>You are at the homepage</h1>
-</div>
+	<div> 
+		<jsp:include page="header.jsp"></jsp:include>
+	</div>
 
-<a href="signup">Sign Up</a>
-<a href="index">Home</a>
-<a href="login">Login</a>
-<a href="guest-tournament">Start a Tournament</a>
+	
+	<div class="container">
+		<h2> There will be some <strong>epic</strong> content here soon.</h2>
+		<br>
+		<h4>I <soft> promise </soft>...</h4>
+	</div>
+	
 
 
 </body>

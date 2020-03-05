@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="brackets")
 public class Bracket {
@@ -18,13 +19,85 @@ public class Bracket {
 	
 	@Column(name="bracket_name")
 	private String name;
-	ArrayList<Player> totalPlayers = new ArrayList<>();
-	ArrayList<Player> activePlayers = new ArrayList<>();
-	ArrayList<TempPlayer> totalTempPlayers = new ArrayList<>();
-	ArrayList<TempPlayer> activeTempPlayers = new ArrayList<>();
-	
+	public ArrayList<Player> totalPlayers = new ArrayList<>();
+	public ArrayList<Player> activePlayers = new ArrayList<>();
+	public ArrayList<TempPlayer> totalTempPlayers = new ArrayList<>();
+	public ArrayList<TempPlayer> activeTempPlayers = new ArrayList<>();
+	public ArrayList<Match> matches = new ArrayList<>();
+	public ArrayList<TempMatch> tempMatches = new ArrayList<>();
+
 
 	
+	
+	// ************* Methods *****************
+	
+	
+	// to create bracket
+	public static void createBracket(ArrayList<Player> players) {
+		
+		int playerCount = players.size();
+		
+		
+		
+	}
+	
+	
+	// to determine total # of rounds in a bracket
+	public static int totalRounds(ArrayList<Player> activePlayers) {
+		
+		int totalRounds = 0;
+		double playerNum = activePlayers.size();
+		
+		do {
+			playerNum /= 2; 
+			totalRounds++;
+			
+		}while(playerNum > 1);
+		
+		return totalRounds;
+	}
+
+	// to generate the current round of matches
+	public ArrayList<TempMatch> generateTempMatches(ArrayList<TempPlayer> activePlayers){
+		
+		ArrayList<TempMatch> matches = new ArrayList<TempMatch>();
+		
+		for(int i=0;i<activePlayers.size()-1;i++) {
+			
+			TempPlayer current = activePlayers.get(i);
+			
+			TempPlayer following = activePlayers.get(i+1);
+		
+			if(current.isInMatch() == false) {
+				
+
+				TempMatch match = new TempMatch();
+			
+				// assign players to a match and adjust their inMatch bool to true
+				match.player1 = current;
+				match.player2 = following;
+				current.setInMatch(true);
+				following.setInMatch(true);
+				
+				// add the match to the bracket list
+				matches.add(match);
+				
+				
+			}
+			
+		}
+		
+		return matches;
+	}
+	
+	
+	
+	// ************* Bracket ****************
+
+	public Bracket() {}
+	
+
+	// ************* Getters/Setters ****************
 	public Long getId() {
 		return id;
 	}
@@ -40,40 +113,40 @@ public class Bracket {
 	public void setName(String name) {
 		this.name = name;
 	}
-//
-//	public ArrayList<Player> getTotalPlayers() {
-//		return totalPlayers;
-//	}
-//
-//	public void setTotalPlayers(ArrayList<Player> totalPlayers) {
-//		this.totalPlayers = totalPlayers;
-//	}
-//
-//	public ArrayList<Player> getActivePlayers() {
-//		return activePlayers;
-//	}
-//
-//	public void setActivePlayers(ArrayList<Player> activePlayers) {
-//		this.activePlayers = activePlayers;
-//	}
-//
-//	public ArrayList<TempPlayer> getTotalTempPlayers() {
-//		return totalTempPlayers;
-//	}
-//
-//	public void setTotalTempPlayers(ArrayList<TempPlayer> totalTempPlayers) {
-//		this.totalTempPlayers = totalTempPlayers;
-//	}
-//
-//	public ArrayList<TempPlayer> getActiveTempPlayers() {
-//		return activeTempPlayers;
-//	}
-//
-//	public void setActiveTempPlayers(ArrayList<TempPlayer> activeTempPlayers) {
-//		this.activeTempPlayers = activeTempPlayers;
-//	}
 
+	public ArrayList<Player> getTotalPlayers() {
+		return totalPlayers;
+	}
 
+	public void setTotalPlayers(ArrayList<Player> totalPlayers) {
+		this.totalPlayers = totalPlayers;
+	}
 
+	public ArrayList<Player> getActivePlayers() {
+		return activePlayers;
+	}
+
+	public void setActivePlayers(ArrayList<Player> activePlayers) {
+		this.activePlayers = activePlayers;
+	}
+
+	public ArrayList<TempPlayer> getTotalTempPlayers() {
+		return totalTempPlayers;
+	}
+
+	public void setTotalTempPlayers(ArrayList<TempPlayer> totalTempPlayers) {
+		this.totalTempPlayers = totalTempPlayers;
+	}
+
+	public ArrayList<TempPlayer> getActiveTempPlayers() {
+		return activeTempPlayers;
+	}
+
+	public void setActiveTempPlayers(ArrayList<TempPlayer> activeTempPlayers) {
+		this.activeTempPlayers = activeTempPlayers;
+	}
+
+	
+	
 
 }

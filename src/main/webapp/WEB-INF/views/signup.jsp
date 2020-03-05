@@ -15,9 +15,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 
-<div class="container">
-<h2>Sign up</h2>
-</div>
+	<jsp:include page="header.jsp"/>
 
 <div>
 <a href="index">Home</a>

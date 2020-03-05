@@ -1,11 +1,23 @@
 package com.mybracket.entity;
 
+import java.util.ArrayList;
+
 public class Match {
 	
-	private Player player1;
-	private Player player2;
+	public Player player1;
+	public Player player2;
 	private Player[] match = {player1, player2};
 	
+	
+	
+	// ************* Methods *****************
+
+	
+	
+	
+	
+	
+	// ************* Getters/Setters ****************
 	public Player getPlayer1() {
 		return player1;
 	}

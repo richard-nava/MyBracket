@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mybracket.entity.Bracket;
 import com.mybracket.entity.Player;
 import com.mybracket.entity.TempPlayer;
+import com.mybracket.entity.TempMatch;
 import com.mybracket.entity.Tournament;
 import com.mybracket.repository.PlayerRepository;
 
@@ -38,7 +40,7 @@ public class PlayerController {
 	PlayerRepository playerRepo;
 	
 	
-	// *********** Login/Logout ***********
+	// ***************** Login/Logout *****************
 	@GetMapping("login")
 	String login() {
 		return "login";
@@ -70,7 +72,8 @@ public class PlayerController {
 	}
 	
 	
-	// *********** Sign up ***********
+	
+	// ***************** Sign up *****************
 	@GetMapping("signup")
 	String signup(Model model) {
 		model.addAttribute("player", new Player());
@@ -98,7 +101,7 @@ public class PlayerController {
 	}
 	
 	
-	// *********** Guest Tournaments (Tournaments that aren't saved) ***********
+	// ***************** Guest Tournaments (Tournaments that aren't saved) ***********
 	@GetMapping("guest-tournament")
 	String guestTourney() {
 		return "guest-tournament";
@@ -108,8 +111,26 @@ public class PlayerController {
 	@PostMapping("guestTournamentCreate")
 	String createGuestTournament(@RequestParam String names, Model model) {
 		
+		Bracket bracket = new Bracket();
 		ArrayList<TempPlayer> players = Tournament.generateTournament(names);
+		ArrayList<TempPlayer> activePlayers = new ArrayList<>();
+		activePlayers.addAll(players);
+		ArrayList<TempMatch> matches = bracket.generateTempMatches(activePlayers);
 		model.addAttribute("players", players);
+		model.addAttribute("activePlayers", activePlayers);
+		model.addAttribute("matches", matches);
+		
+		
+		return "your-tournament";
+	}
+	
+	/*
+	 *  pushing the "update" button will update the 
+	 *	tournament bracket
+	 */ 
+	@PostMapping("updateGuestTournament")
+	String updateGuestTournament(){
+		
 		
 		
 		return "your-tournament";
@@ -117,12 +138,10 @@ public class PlayerController {
 	
 	
 	
-	
 	@GetMapping("profile")
 	String profile() {
 		return "profile";
 	}
-	
 	
 	
 	@GetMapping(value={"/","index"})
