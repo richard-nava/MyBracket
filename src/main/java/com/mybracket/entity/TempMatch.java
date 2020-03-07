@@ -7,6 +7,7 @@ public class TempMatch {
 	public TempPlayer player1;
 	public TempPlayer player2;
 	private TempPlayer[] match = {player1, player2};
+	int matchRound;
 	
 	
 	
@@ -120,6 +121,18 @@ public class TempMatch {
 	public void setMatch(TempPlayer[] match) {
 		this.match = match;
 	}
+
+
+	public int getMatchRound() {
+		return matchRound;
+	}
+
+
+	public void setMatchRound(int matchRound) {
+		this.matchRound = matchRound;
+	}
+
+
 	
 	
 

@@ -25,11 +25,16 @@ public class Bracket {
 	public ArrayList<TempPlayer> activeTempPlayers = new ArrayList<>();
 	public ArrayList<Match> matches = new ArrayList<>();
 	public ArrayList<TempMatch> tempMatches = new ArrayList<>();
-
+	int currentRound;
+	int totalRounds;
+	
 
 	
 	
 	// ************* Methods *****************
+	
+	// determine # of matches
+	
 	
 	
 	// to create bracket
@@ -56,6 +61,21 @@ public class Bracket {
 		
 		return totalRounds;
 	}
+	
+	public int totalTempRounds(ArrayList<TempPlayer> activePlayers) {
+		
+		int totalRounds = 0;
+		double playerNum = activePlayers.size();
+		
+		do {
+			playerNum /= 2; 
+			totalRounds++;
+			
+		}while(playerNum > 1);
+		
+		return totalRounds;
+	}
+
 
 	// to generate the current round of matches
 	public ArrayList<TempMatch> generateTempMatches(ArrayList<TempPlayer> activePlayers){
@@ -146,7 +166,46 @@ public class Bracket {
 		this.activeTempPlayers = activeTempPlayers;
 	}
 
-	
+	public ArrayList<Match> getMatches() {
+		return matches;
+	}
+
+
+	public void setMatches(ArrayList<Match> matches) {
+		this.matches = matches;
+	}
+
+
+	public ArrayList<TempMatch> getTempMatches() {
+		return tempMatches;
+	}
+
+
+	public void setTempMatches(ArrayList<TempMatch> tempMatches) {
+		this.tempMatches = tempMatches;
+	}
+
+
+	public int getCurrentRound() {
+		return currentRound;
+	}
+
+
+	public void setCurrentRound(int currentRound) {
+		this.currentRound = currentRound;
+	}
+
+
+	public int getTotalRounds() {
+		return totalRounds;
+	}
+
+
+	public void setTotalRounds(int totalRounds) {
+		this.totalRounds = totalRounds;
+	}
+
+
 	
 
 }

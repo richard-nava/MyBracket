@@ -7,7 +7,7 @@ public class Match {
 	public Player player1;
 	public Player player2;
 	private Player[] match = {player1, player2};
-	
+	int currentRound;
 	
 	
 	// ************* Methods *****************
@@ -18,8 +18,16 @@ public class Match {
 	
 	
 	// ************* Getters/Setters ****************
+	
+	
 	public Player getPlayer1() {
 		return player1;
+	}
+	public int getCurrentRound() {
+		return currentRound;
+	}
+	public void setCurrentRound(int currentRound) {
+		this.currentRound = currentRound;
 	}
 	public void setPlayer1(Player player1) {
 		this.player1 = player1;

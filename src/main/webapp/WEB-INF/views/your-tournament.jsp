@@ -20,35 +20,35 @@ pageEncoding="UTF-8"%>
 
 	<jsp:include page="header.jsp"></jsp:include>
 
+	<br>
+	
+	<div class="container">
+		<div class="card">
+			<div class="card-body">
+			
+			<h2>Players: </h2>
+			<c:forEach var="player" items="${players}">
+			
+			<td>${player.name} <br> </td>
+			
+			</c:forEach>
+			
+			<br>
+			
+			<h3>Total Active players: ${activePlayers.size()}</h3>
+			<h3>Total Rounds: ${totalRounds}</h3>
+			</div>
+		</div>
+	</div>
+	
+	<br><br>
 
-<div>
-<h2>Players: </h2>
-<c:forEach var="player" items="${players}">
 
-<td>${player.name} <br> </td>
-
-</c:forEach>
-
-<h3>Total Active players: ${activePlayers.size()}</h3>
-</div>
-
-
-<form action="updateGuestTournament">
-<div class="container">
- 
+	<form action="updateGuestTournament">
+	<div class="container">
+	 
   
-  	<!-- INSERT MATCH CARDS HERE -->
   	<c:forEach var="match" items="${matches}">
-  
-  		<!--   <div class="container">
-		      <div class="list-group">
-				  <button type="button" class="list-group-item list-group-item-action">
-				    ${match.player1}
-				  </button>
-				  <button type="button" class="list-group-item list-group-item-action">${match.player2}</button>
-			  </div>
-			  
-			   -->
 			   
 			    <div class="row">
 				  <div class="card">
@@ -65,14 +65,14 @@ pageEncoding="UTF-8"%>
 			  <br>
 			  
 			  
-   </c:forEach>
-  </div>
+ 	  </c:forEach>
+ 	 </div>
 
-<div class="container">
-	<button action="submit">Generate Next round</button>
-</div>
-
-</form>
+	<div class="container">
+		<button action="submit">Generate Next round</button>
+	</div>
+	
+	</form>
 
 
 </body>

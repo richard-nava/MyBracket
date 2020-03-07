@@ -19,23 +19,29 @@ pageEncoding="UTF-8"%>
 	<jsp:include page="header.jsp"/>
 
 
-	<div>
-		<h2>${msg}</h2>
-	</div>
+	<br><br>
 	
 	<div class="container">
-		<form action="${action}" method="post">
-		  <div class="form-group">
-		    <label for="exampleUsername">Username</label>
-		    <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp"/>
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">Password</label>
-		    <input type="password" name="password" class="form-control" id="password"/>
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+	
+		<div class="card" style="width: 25rem;">
+			<div class="card-body">
+				<div>
+					<h2>${msg}</h2>
+				</div>
+		    <form action="${action}" method="post">
+			  <div class="form-group">
+			    <label for="exampleUsername">Username</label>
+			    <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputPassword1">Password</label>
+			    <input type="password" name="password" class="form-control" id="password"/>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+			</div>
 		</div>
+	</div>
 	 
 	
 	

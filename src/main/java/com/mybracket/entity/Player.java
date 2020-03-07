@@ -23,6 +23,9 @@ public class Player {
 	@Column(name="last_name")
 	private String lastName;
 	
+	@Column(name="role")
+	private String role;
+	
 	private String confirmPass;
 	public boolean matchResult; 
 	public boolean inMatch = false;
@@ -49,6 +52,14 @@ public class Player {
 	
 	
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public boolean isMatchResult() {
 		return matchResult;
 	}

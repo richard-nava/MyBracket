@@ -20,11 +20,15 @@ pageEncoding="UTF-8"%>
 		<jsp:include page="header.jsp"></jsp:include>
 	</div>
 
+	<br>
 	
 	<div class="container">
 		<h2> There will be some <strong>epic</strong> content here soon.</h2>
 		<br>
-		<h4>I <soft> promise </soft>...</h4>
+		<h4>I promise...</h4>
+		<br>
+		<small>...please go away now, you're making me feel self-conscious.</small>
+		
 	</div>
 	
 

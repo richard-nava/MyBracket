@@ -112,13 +112,21 @@ public class PlayerController {
 	String createGuestTournament(@RequestParam String names, Model model) {
 		
 		Bracket bracket = new Bracket();
+		
 		ArrayList<TempPlayer> players = Tournament.generateTournament(names);
 		ArrayList<TempPlayer> activePlayers = new ArrayList<>();
 		activePlayers.addAll(players);
+		bracket.setTotalRounds(bracket.totalTempRounds(activePlayers));
+		int totalRounds = bracket.getTotalRounds();
+		
+		// make it so this method also takes in current round and applies it to the match
 		ArrayList<TempMatch> matches = bracket.generateTempMatches(activePlayers);
 		model.addAttribute("players", players);
 		model.addAttribute("activePlayers", activePlayers);
 		model.addAttribute("matches", matches);
+		model.addAttribute("bracket", bracket);
+		model.addAttribute("totalRounds", totalRounds);
+		
 		
 		
 		return "your-tournament";
@@ -128,9 +136,17 @@ public class PlayerController {
 	 *  pushing the "update" button will update the 
 	 *	tournament bracket
 	 */ 
+	
 	@PostMapping("updateGuestTournament")
 	String updateGuestTournament(){
 		
+		// pump current round ++ 
+		
+		// compare current round with max rounds
+		
+		// subtract losing players from active players
+		
+		// matchup active players
 		
 		
 		return "your-tournament";
