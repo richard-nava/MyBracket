@@ -13,10 +13,23 @@ public class TempPlayer {
 	@Column(name="Name")
 	private String name;
 	private boolean inMatch = false;
+	private boolean winner = false;
 	
 	public TempPlayer() {}
 	
 	
+	
+	
+	public boolean isWinner() {
+		return winner;
+	}
+
+
+	public void setWinner(boolean winner) {
+		this.winner = winner;
+	}
+
+
 	public boolean isInMatch() {
 		return inMatch;
 	}

@@ -8,12 +8,12 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.capstone</groupId>
-	<artifactId>homelistings</artifactId>
+	<groupId>com.mybracket</groupId>
+	<artifactId>mybracket</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>homelistings</name>
-	<description>homelistings project for Spring Boot</description>
+	<name>MyBracket</name>
+	<description>Bracket project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>

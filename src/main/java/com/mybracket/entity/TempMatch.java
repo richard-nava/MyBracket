@@ -1,6 +1,7 @@
 package com.mybracket.entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TempMatch {
 	
@@ -13,7 +14,7 @@ public class TempMatch {
 	
 	
 	
-	public static void createTempMatch(ArrayList<TempPlayer> players) {
+	public static void createTempMatch(ArrayList<TempPlayer> players, int currentRound) {
 		if(players.size() % 2 == 0) {
 			
 			System.out.println("in player count section");
@@ -38,6 +39,9 @@ public class TempMatch {
 						match.player2 = following;
 						current.setInMatch(true);
 						following.setInMatch(true);
+						
+						// set the match round to the current round. 
+						match.setMatchRound(currentRound);
 						
 						// add the match to the bracket list
 					//FIX THIS	bracket.matches.add(match);
@@ -130,6 +134,13 @@ public class TempMatch {
 
 	public void setMatchRound(int matchRound) {
 		this.matchRound = matchRound;
+	}
+
+
+	@Override
+	public String toString() {
+		return "TempMatch [player1=" + player1 + ", player2=" + player2 + ", match=" + Arrays.toString(match)
+				+ ", matchRound=" + matchRound + "]";
 	}
 
 

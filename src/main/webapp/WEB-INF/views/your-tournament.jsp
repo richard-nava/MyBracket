@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%>
 <head>
 <meta charset="UTF-8">
 
-<!--   <link rel="stylesheet" href="styles.css" type="text/css" /> -->
+<link rel="stylesheet" href="styles.css" type="text/css" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <title>Generated Tournament</title>
@@ -20,43 +20,47 @@ pageEncoding="UTF-8"%>
 
 	<jsp:include page="header.jsp"></jsp:include>
 
-	<br>
+	<br><br>
 	
 	<div class="container">
-		<div class="card">
+		<div class="card display-players">
 			<div class="card-body">
 			
 			<h2>Players: </h2>
-			<c:forEach var="player" items="${players}">
+			<c:forEach var="players" items="${bracket.totalTempPlayers}" varStatus="loop">
 			
-			<td>${player.name} <br> </td>
+			<td>${players} <br> </td>
 			
 			</c:forEach>
 			
 			<br>
 			
-			<h3>Total Active players: ${activePlayers.size()}</h3>
-			<h3>Total Rounds: ${totalRounds}</h3>
+			<h3>Total Active players: ${bracket.activeTempPlayers.size()}</h3>
+			<h3>Total Rounds: ${bracket.totalRounds}</h3>
+		
 			</div>
 		</div>
 	</div>
 	
 	<br><br>
-
+	
+	
+	
+		
 
 	<form action="updateGuestTournament">
 	<div class="container">
 	 
   
-  	<c:forEach var="match" items="${matches}">
+  	<c:forEach var="match" items="${bracket.tempMatches}">
 			   
 			    <div class="row">
 				  <div class="card">
-					  <div class="card-body">
+					  <div class="card-body col-sm">
 					    <div>
-					    	 ${match.player1} <input type="radio" id="${match.player1}" name="${match.player1}" value="${match.player1}">
+					    	 ${match.player1} <input type="checkbox" id="${match.player1}" name="winner" value="${match.player1}">
 					    	 <br><br>
-					    	 ${match.player2}<input type="radio" id="${match.player2}" name="${match.player2}" value="${match.player2}">
+					    	 ${match.player2}<input type="checkbox" id="${match.player2}" name="winner" value="${match.player2}">
 					    	
 					    </div>
 					  </div>
@@ -66,10 +70,13 @@ pageEncoding="UTF-8"%>
 			  
 			  
  	  </c:forEach>
+ 	  
+ 	  
+ 	  
  	 </div>
 
 	<div class="container">
-		<button action="submit">Generate Next round</button>
+		<button type="submit">Generate Next round</button>
 	</div>
 	
 	</form>

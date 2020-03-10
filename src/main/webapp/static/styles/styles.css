@@ -22,3 +22,12 @@
   border: 3px solid green;
   padding: 10px;
 }
+
+.navbar{
+	padding-top: 20px;
+}
+
+.display-players{
+	padding-top:20px;
+	background-color: red;
+}

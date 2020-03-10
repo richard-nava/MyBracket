@@ -33,7 +33,7 @@ import com.mybracket.repository.PlayerRepository;
 
 @CrossOrigin
 @Controller
-@SessionAttributes("loggedInUser")
+@SessionAttributes({"loggedInUser","tournamentBracket"})
 public class PlayerController {
 	
 	@Autowired
@@ -103,53 +103,112 @@ public class PlayerController {
 	
 	// ***************** Guest Tournaments (Tournaments that aren't saved) ***********
 	@GetMapping("guest-tournament")
-	String guestTourney() {
+	String guestTourney(Model model) {
+		model.addAttribute("bracket", new Bracket());
 		return "guest-tournament";
 	}
 	
 	
 	@PostMapping("guestTournamentCreate")
-	String createGuestTournament(@RequestParam String names, Model model) {
-		
+	String createGuestTournament(@RequestParam String names,@RequestParam String bracketName, Model model) {
 		Bracket bracket = new Bracket();
-		
+		int currentRound = 1;
 		ArrayList<TempPlayer> players = Tournament.generateTournament(names);
 		ArrayList<TempPlayer> activePlayers = new ArrayList<>();
 		activePlayers.addAll(players);
 		bracket.setTotalRounds(bracket.totalTempRounds(activePlayers));
 		int totalRounds = bracket.getTotalRounds();
+		int totalMatches = activePlayers.size() - 1;
+
+
 		
 		// make it so this method also takes in current round and applies it to the match
-		ArrayList<TempMatch> matches = bracket.generateTempMatches(activePlayers);
+		ArrayList<TempMatch> matches = bracket.generateTempMatches(activePlayers);		
+		ArrayList<TempMatch> allMatches = new ArrayList<>();
+		
+		
+		
 		model.addAttribute("players", players);
 		model.addAttribute("activePlayers", activePlayers);
 		model.addAttribute("matches", matches);
+		model.addAttribute("allMatches", allMatches);
 		model.addAttribute("bracket", bracket);
 		model.addAttribute("totalRounds", totalRounds);
+		model.addAttribute("currentRound", currentRound);
+		
 		
 		
 		
 		return "your-tournament";
 	}
+	
+	
+	@PostMapping("guestTournamentCreate2")
+	String createGuestTournament2(@RequestParam String names,@ModelAttribute Bracket bracket, String bracketName, Model model) {
+		
+		
+		model.addAttribute("tournamentBracket", bracket);
+
+		int currentRound = 1;
+		ArrayList<TempPlayer> players = Tournament.generateTournament(names);
+		
+		ArrayList<TempPlayer> activePlayers = new ArrayList<>();
+		activePlayers.addAll(players);
+		bracket.setTotalRounds(bracket.totalTempRounds(activePlayers));
+		int totalRounds = bracket.getTotalRounds();
+
+
+		
+		// make it so this method also takes in current round and applies it to the match
+		//ArrayList<TempMatch> matches = bracket.generateTempMatches(activePlayers, currentRound);		
+		ArrayList<TempMatch> matches = new ArrayList<TempMatch>();
+		bracket.setTempMatches(matches);
+		Bracket.fillTempBracket(activePlayers, totalRounds, matches);
+		Bracket.assignPlayers(activePlayers, currentRound, matches);
+		
+		
+		
+		bracket.setName(bracketName);
+		bracket.setActiveTempPlayers(activePlayers);
+		bracket.setTotalTempPlayers(players);
+		bracket.setTotalRounds(totalRounds);
+		bracket.setCurrentRound(currentRound);
+		
+		
+		
+		return "your-tournament";
+	}
+	
 	
 	/*
 	 *  pushing the "update" button will update the 
 	 *	tournament bracket
 	 */ 
 	
-	@PostMapping("updateGuestTournament")
-	String updateGuestTournament(){
-		
+	@RequestMapping(value="updateGuestTournament", method=RequestMethod.GET)
+	String updateGuestTournament(@RequestParam int currentRound, @RequestParam ArrayList<TempPlayer> players,
+								 @RequestParam ArrayList<TempPlayer> activePlayers, @RequestParam TempPlayer winner,
+								 @RequestParam ArrayList<TempMatch> matches, @RequestParam Bracket bracket, Model model){
+		System.out.println("**********" + winner + "**********");
+
 		// pump current round ++ 
+		int newCurrentRound = currentRound + 1;
 		
-		// compare current round with max rounds
+		
+		// take in winners
+		
+		
 		
 		// subtract losing players from active players
 		
+		
+		
 		// matchup active players
+		model.addAttribute("currentRound", newCurrentRound);
 		
 		
-		return "your-tournament";
+		
+		return "index";
 	}
 	
 	

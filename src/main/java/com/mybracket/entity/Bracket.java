@@ -34,17 +34,22 @@ public class Bracket {
 	// ************* Methods *****************
 	
 	// determine # of matches
-	
-	
-	
-	// to create bracket
-	public static void createBracket(ArrayList<Player> players) {
+	public int numTempMatches(int totalRounds, ArrayList<TempPlayer> players) {
 		
+		int numMatches = 0;
 		int playerCount = players.size();
 		
+		for(int i = 0; i<=totalRounds;i++) {
+			
+			
+		}
 		
 		
+		
+		
+		return numMatches;
 	}
+	
 	
 	
 	// to determine total # of rounds in a bracket
@@ -62,7 +67,7 @@ public class Bracket {
 		return totalRounds;
 	}
 	
-	public int totalTempRounds(ArrayList<TempPlayer> activePlayers) {
+	public static int totalTempRounds(ArrayList<TempPlayer> activePlayers) {
 		
 		int totalRounds = 0;
 		double playerNum = activePlayers.size();
@@ -77,7 +82,7 @@ public class Bracket {
 	}
 
 
-	// to generate the current round of matches
+	// to generate the current round of matches (v1)
 	public ArrayList<TempMatch> generateTempMatches(ArrayList<TempPlayer> activePlayers){
 		
 		ArrayList<TempMatch> matches = new ArrayList<TempMatch>();
@@ -97,8 +102,7 @@ public class Bracket {
 				match.player1 = current;
 				match.player2 = following;
 				current.setInMatch(true);
-				following.setInMatch(true);
-				
+				following.setInMatch(true);				
 				// add the match to the bracket list
 				matches.add(match);
 				
@@ -110,6 +114,57 @@ public class Bracket {
 		return matches;
 	}
 	
+	// to generate the current round of matches (v2)
+	public static void assignPlayers(ArrayList<TempPlayer> active, int currentRound, ArrayList<TempMatch> matches) {
+		
+		// look at each match
+		for(TempMatch var: matches) {
+			
+			// if the match's round equal the current round
+			if(var.getMatchRound() == currentRound){
+				
+				for(int i=0;i<active.size()-1;i++) {
+				
+					TempPlayer current = active.get(i);
+					TempPlayer following = active.get(i+1);
+					
+					if(current.isInMatch() == false) {
+							
+						// assign players to the match and adjust their inMatch bool to true
+						var.player1 = current;
+						var.player2 = following;
+						current.setInMatch(true);
+						following.setInMatch(true);	
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	
+	// generates all matches for a temporary bracket
+	public static void fillTempBracket(ArrayList<TempPlayer> active, int rounds, ArrayList<TempMatch> matches) {
+		
+		int num = active.size()/2;
+		
+			for(int i=1;i<=rounds;i++){
+			
+			int matchesNeededForRound = num;
+			
+				for(int j=1;j<=matchesNeededForRound;j++) {
+					TempMatch match = new TempMatch();
+					match.setMatchRound(i);
+					matches.add(match);
+				}
+				
+			num /= 2;
+			
+			}
+			
+	}
+	
+
 	
 	
 	// ************* Bracket ****************
